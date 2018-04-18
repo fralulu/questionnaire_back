@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!--
+      maxWaitMillis：获取连接时的最大等待毫秒数，默认为-1.表示永不超时.
+      maxTotal：最大连接数
+      minIdle：最小空闲连接数
+      maxIdle：最大空闲连接数
+      testOnBorrow:获取“连接”资源时，是否检测连接有效，如果无效则从连接池中移除，并尝试获取继续获取。默认为false。建议保持默认值.
+      testOnReturn:向连接池“归还”连接时，是否检测“链接”对象的有效性。默认为false。建议保持默认值.
+      minEvictableIdleTimeMillis:连接空闲的最小时间，达到此值后空闲连接将可能会被移除。负值(-1)表示不移除.
+      softMinEvictableIdleTimeMillis:连接空闲的最小时间，达到此值后空闲链接将会被移除，且保留“minIdle”个空闲连接数。默认为-1.
+      testWhileIdle:获取“连接”对象时，是否检测它的空闲超时；默认为false。如果“连接”空闲超时，将会被移除。建议保持默认值.
+      timeBetweenEvictionRunsMillis:“空闲连接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1.
+      whenExhaustedAction: 当“连接池”中active数量达到阀值时，即“链接”资源耗尽时，连接池需要采取的手段, 默认为1：
+                           -> 0 : 抛出异常，
+                           -> 1 : 阻塞，直到有可用链接资源,这里如果设置了maxWait值，则在阻塞了maxWait时间后抛出异常
+                           -> 2 : 强制创建新的链接资源
+   -->
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <property name="maxTotal" value="${redis.pool.maxTotal}"/>
+    <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+    <property name="minIdle" value="${redis.pool.minIdle}"/>
+    <property name="maxWaitMillis" value="${redis.pool.maxWait}"/>
+    <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+  </bean>
+
+  <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+    <constructor-arg index="0" ref="jedisPoolConfig" />
+    <constructor-arg index="1">
+      <list>
+        <bean class="redis.clients.jedis.JedisShardInfo">
+          <constructor-arg name="host" value="${redis.first.host}"  />
+          <constructor-arg name="port" value=""/>
+        </bean>
+        <bean class="redis.clients.jedis.JedisShardInfo">
+          <constructor-arg name="host" value="${redis.second.host}"  />
+        </bean>
+      </list>
+    </constructor-arg>
+  </bean>
+</beans>

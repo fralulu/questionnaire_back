@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.TUserOperationMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.TUserOperation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_code" jdbcType="VARCHAR" property="operateCode" />
+    <result column="operate_content" jdbcType="VARCHAR" property="operateContent" />
+    <result column="result_code" jdbcType="VARCHAR" property="resultCode" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, user_type, operate_time, operate_code, operate_content, result_code, 
+    remark, create_user, create_time, update_user, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_operation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_operation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.TUserOperation">
+    insert into t_user_operation (id, user_id, user_type, 
+      operate_time, operate_code, operate_content, 
+      result_code, remark, create_user, 
+      create_time, update_user, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userType,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateCode,jdbcType=VARCHAR}, #{operateContent,jdbcType=VARCHAR}, 
+      #{resultCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.TUserOperation">
+    insert into t_user_operation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateCode != null">
+        operate_code,
+      </if>
+      <if test="operateContent != null">
+        operate_content,
+      </if>
+      <if test="resultCode != null">
+        result_code,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateCode != null">
+        #{operateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operateContent != null">
+        #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="resultCode != null">
+        #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.TUserOperation">
+    update t_user_operation
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateCode != null">
+        operate_code = #{operateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operateContent != null">
+        operate_content = #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="resultCode != null">
+        result_code = #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.TUserOperation">
+    update t_user_operation
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_type = #{userType,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_code = #{operateCode,jdbcType=VARCHAR},
+      operate_content = #{operateContent,jdbcType=VARCHAR},
+      result_code = #{resultCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByPagination" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_operation
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+          and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="userType != null">
+          and user_type = #{userType,jdbcType=VARCHAR}
+      </if>
+      <if test="operateTime != null">
+          and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operateCode != null">
+          and operate_code = #{operateCode,jdbcType=VARCHAR}
+      </if>
+      <if test="operateContent != null">
+          and operate_content = #{operateContent,jdbcType=VARCHAR}
+      </if>
+      <if test="resultCode != null">
+          and result_code = #{resultCode,jdbcType=VARCHAR}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+  <select id="selectListByEntity" parameterType="com.infore.model.TUserOperation" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_operation
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+          and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="userType != null">
+          and user_type = #{userType,jdbcType=VARCHAR}
+      </if>
+      <if test="operateTime != null">
+          and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operateCode != null">
+          and operate_code = #{operateCode,jdbcType=VARCHAR}
+      </if>
+      <if test="operateContent != null">
+          and operate_content = #{operateContent,jdbcType=VARCHAR}
+      </if>
+      <if test="resultCode != null">
+          and result_code = #{resultCode,jdbcType=VARCHAR}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+</mapper>

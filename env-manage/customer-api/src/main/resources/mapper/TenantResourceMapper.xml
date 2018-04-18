@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.TenantResourceMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.TenantResource">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pids" jdbcType="VARCHAR" property="pids" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="ulr" jdbcType="VARCHAR" property="ulr" />
+    <result column="is_show" jdbcType="CHAR" property="isShow" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="creater_id" jdbcType="INTEGER" property="createrId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, pids, name, ulr, is_show, remarks, creater_id, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_tenant_resource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_tenant_resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.TenantResource">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_tenant_resource (pid, pids, name, 
+      ulr, is_show, remarks, 
+      creater_id, create_date, update_date
+      )
+    values (#{pid,jdbcType=INTEGER}, #{pids,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{ulr,jdbcType=VARCHAR}, #{isShow,jdbcType=CHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{createrId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.TenantResource">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_tenant_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="pids != null">
+        pids,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="ulr != null">
+        ulr,
+      </if>
+      <if test="isShow != null">
+        is_show,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="createrId != null">
+        creater_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pids != null">
+        #{pids,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ulr != null">
+        #{ulr,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createrId != null">
+        #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.TenantResource">
+    update sys_tenant_resource
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pids != null">
+        pids = #{pids,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ulr != null">
+        ulr = #{ulr,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        is_show = #{isShow,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createrId != null">
+        creater_id = #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.TenantResource">
+    update sys_tenant_resource
+    set pid = #{pid,jdbcType=INTEGER},
+      pids = #{pids,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      ulr = #{ulr,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=CHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

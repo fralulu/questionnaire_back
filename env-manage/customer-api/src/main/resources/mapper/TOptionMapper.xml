@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.TOptionMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.TOption">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="test_id" jdbcType="INTEGER" property="testId" />
+    <result column="option_type" jdbcType="VARCHAR" property="optionType" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="view_control" jdbcType="VARCHAR" property="viewControl" />
+    <result column="relation_option" jdbcType="VARCHAR" property="relationOption" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, test_id, option_type, content, img, description, view_control, relation_option, 
+    create_user, create_time, update_user, update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_option
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_option
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.TOption">
+    insert into t_option (id, test_id, option_type, 
+      content, img, description, 
+      view_control, relation_option, create_user, 
+      create_time, update_user, update_time, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{testId,jdbcType=INTEGER}, #{optionType,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{viewControl,jdbcType=VARCHAR}, #{relationOption,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.TOption"  keyProperty="id" useGeneratedKeys="true">
+    insert into t_option
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="testId != null">
+        test_id,
+      </if>
+      <if test="optionType != null">
+        option_type,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="viewControl != null">
+        view_control,
+      </if>
+      <if test="relationOption != null">
+        relation_option,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testId != null">
+        #{testId,jdbcType=INTEGER},
+      </if>
+      <if test="optionType != null">
+        #{optionType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="viewControl != null">
+        #{viewControl,jdbcType=VARCHAR},
+      </if>
+      <if test="relationOption != null">
+        #{relationOption,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.TOption">
+    update t_option
+    <set>
+      <if test="testId != null">
+        test_id = #{testId,jdbcType=INTEGER},
+      </if>
+      <if test="optionType != null">
+        option_type = #{optionType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="viewControl != null">
+        view_control = #{viewControl,jdbcType=VARCHAR},
+      </if>
+      <if test="relationOption != null">
+        relation_option = #{relationOption,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.TOption">
+    update t_option
+    set test_id = #{testId,jdbcType=INTEGER},
+      option_type = #{optionType,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      view_control = #{viewControl,jdbcType=VARCHAR},
+      relation_option = #{relationOption,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByPagination" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_option
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="testId != null">
+          and test_id = #{testId,jdbcType=INTEGER}
+      </if>
+      <if test="optionType != null">
+          and option_type = #{optionType,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null">
+          and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="img != null">
+          and img = #{img,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null">
+          and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="viewControl != null">
+          and view_control = #{viewControl,jdbcType=VARCHAR}
+      </if>
+      <if test="relationOption != null">
+          and relation_option = #{relationOption,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectListByEntity" parameterType="com.infore.model.TOption" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_option
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="testId != null">
+          and test_id = #{testId,jdbcType=INTEGER}
+      </if>
+      <if test="optionType != null">
+          and option_type = #{optionType,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null">
+          and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="img != null">
+          and img = #{img,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null">
+          and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="viewControl != null">
+          and view_control = #{viewControl,jdbcType=VARCHAR}
+      </if>
+      <if test="relationOption != null">
+          and relation_option = #{relationOption,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+  
+  <select id="selectListLike" parameterType="com.infore.model.dto.TOptionVo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_option
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="testId != null">
+          and test_id = #{testId,jdbcType=INTEGER}
+      </if>
+      <if test="optionType != null">
+          and option_type = #{optionType,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null">
+          and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="img != null">
+          and img = #{img,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null">
+          and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="viewControl != null">
+          and view_control = #{viewControl,jdbcType=VARCHAR}
+      </if>
+      <if test="relationOption != null">
+          and relation_option = #{relationOption,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      
+      <if test="queryLike != null" >
+      	 and (
+      	 
+             (content like  concat(concat('%',#{queryLike,jdbcType=VARCHAR}),'%'))
+              
+      	 )
+      </if>
+    </where>
+  </select>
+  
+  
+  
+   <!-- 批量删除某一试卷的所有试题的选项 -->
+  <delete id="batchDeleteOptionsByTestIds" parameterType="java.util.List">
+    delete from t_option
+    where test_id in
+     <foreach item="item" collection="list" open="(" close=")" separator=",">
+         #{item.id}
+     </foreach>
+  </delete>
+  
+  
+  
+  
+</mapper>

@@ -1,0 +1,235 @@
+
+/*==============================================================*/
+/* Table: iot_bas_runtype      add primary key                  */
+/*==============================================================*/
+Alter table iot_bas_runtype add primary key(run_type);
+
+/*==============================================================*/
+/* Table: iot_bas_telestrategy      add primary key             */
+/*==============================================================*/
+
+Alter table iot_bas_telestrategy add primary key(site_level,device_type,mete_type,device_status);
+
+/*==============================================================*/
+/* Table: iot_bas_useroperation      add primary key            */
+/*==============================================================*/
+Alter table iot_bas_useroperation add primary key(useroperation_id);
+
+
+
+/*==============================================================*/
+/* Table: iot_cfg_telestrategy      add primary key             */
+/*==============================================================*/
+Alter table iot_cfg_telestrategy add primary key(site_level,device_type,mete_type,device_status);
+
+/*==============================================================*/
+/* Table: iot_his_devicealarm      add primary key              */
+/*==============================================================*/
+Alter table iot_his_devicealarm add primary key(alarm_no,device_id);
+
+/*==============================================================*/
+/* Table: iot_his_loginout      add new column key              */
+/*==============================================================*/
+alter table iot_his_loginout add column  id_num int not null ,add primary key (id_num);
+
+/*==============================================================*/
+/* Table: iot_his_operation      add new column key             */
+/*==============================================================*/
+alter table iot_his_operation add column  id_num int not null ,add primary key (id_num);
+
+/*==============================================================*/
+/* Table: iot_his_operation      modify  column key             */
+/*==============================================================*/
+ALTER TABLE iot_bas_signalkind CHANGE report_type signal_kind tinyint not null COMMENT '遥信量类型';
+
+
+/*==============================================================*/
+/* Table: iot_cfg_floor      modify  column key                 */
+/*==============================================================*/
+ALTER TABLE iot_cfg_floor CHANGE precinct_id building_id tinyint not null COMMENT '楼栋编号';
+
+
+
+/*==============================================================*/
+/* Table: iot_cfg_telestrategy      add new column key          */
+/*==============================================================*/
+alter table iot_cfg_telestrategy add column  tenant_id int(11) not null COMMENT '租户编号';
+
+
+/*==============================================================*/
+/* Table: iot_cfg_alminfoext      add new column key            */
+/*==============================================================*/
+alter table iot_cfg_alminfoext add column  state_mete_type smallint not null DEFAULT 0 COMMENT '状态量遥信量类型';
+alter table iot_cfg_alminfoext add column  state_value tinyint  not null DEFAULT 0  COMMENT '状态量遥信量值';
+alter table iot_cfg_alminfoext drop primary key;
+alter table iot_cfg_alminfoext add primary key(device_type,device_model,mete_type,site_level,state_mete_type,state_value);
+
+/*==============================================================*/
+/* Table: 修改如下表的字段类型      add new column key                     */
+/*==============================================================*/
+ALTER TABLE iot_cfg_device MODIFY device_id BIGINT(64)  NOT NULL COMMENT '设备编号';
+ALTER TABLE iot_cfg_device MODIFY fsu_id BIGINT(64)   COMMENT 'FSU设备编号';
+
+ALTER TABLE iot_cfg_telemeter MODIFY device_id BIGINT(64)  NOT NULL COMMENT '设备编号';
+ALTER TABLE iot_cfg_telemeter MODIFY fsu_id BIGINT(64)   DEFAULT 0 COMMENT 'FSU设备编号';
+
+ALTER TABLE iot_cfg_telesignal MODIFY device_id BIGINT(64)  NOT NULL COMMENT '设备编号';
+ALTER TABLE iot_cfg_telesignal MODIFY fsu_id BIGINT(64)   DEFAULT 0 COMMENT 'FSU设备编号';
+
+ALTER TABLE iot_cfg_teleadjust MODIFY device_id BIGINT(64)  NOT NULL COMMENT '设备编号';
+ALTER TABLE iot_cfg_teleadjust MODIFY fsu_id BIGINT(64)   DEFAULT 0 COMMENT 'FSU设备编号';
+
+ALTER TABLE iot_cfg_telecontrol MODIFY device_id BIGINT(64)  NOT NULL COMMENT '设备编号';
+ALTER TABLE iot_cfg_telecontrol MODIFY fsu_id BIGINT(64)   DEFAULT 0 COMMENT 'FSU设备编号';
+
+ALTER TABLE iot_cfg_alarmmask MODIFY device_id BIGINT(64)  NOT NULL COMMENT '设备编号';
+
+ALTER TABLE iot_cfg_fsu MODIFY fsu_id BIGINT(64)   NOT NULL COMMENT 'FSU设备编号';
+
+
+/*==============================================================*/
+/* Table: 修改表iot_cfg_devstatusmap的主键                                                                              */
+/*==============================================================*/
+alter table iot_cfg_devstatusmap drop primary key;
+alter table iot_cfg_devstatusmap add column  id int not null AUTO_INCREMENT,add primary key (id);
+
+
+/*==============================================================*/
+/* Table: iot_bas_devstatusmap      modify  primary key         */
+/*==============================================================*/
+alter table iot_bas_devstatusmap drop primary key;
+alter table iot_bas_devstatusmap add column  id int not null AUTO_INCREMENT ,add primary key (id);
+
+/*==============================================================*/
+/* Table: iot_bas_manufacturer      modify  primary key         */
+/*==============================================================*/
+ alter table iot_bas_manufacturer change manufacturer_id  manufacturer_id smallint(6) AUTO_INCREMENT COMMENT '厂商编号';
+
+/*==============================================================*/
+/* Table: iot_bas_devicemodel      modify  primary key          */
+/*==============================================================*/
+ alter table iot_bas_devicemodel change device_model  device_model smallint(6) AUTO_INCREMENT COMMENT '设备型号编号';
+ 
+ /*=============================================================*/
+/* Table: iot_bas_useroperation      modify  primary key        */
+/*==============================================================*/
+ 
+ alter table iot_bas_useroperation change useroperation_id  useroperation_id smallint(6) AUTO_INCREMENT COMMENT '操作编号';
+ 
+/*=============================================================*/
+/* Table: iot_bas_devicetemplate      modify  colunm  not null */
+/*==============================================================*/
+
+ALTER TABLE iot_bas_devicetemplate MODIFY  bas_mete_name varchar(50) not null  COMMENT '监控量名称';
+
+
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_device      modify  column key           */
+/*==============================================================*/
+ALTER TABLE iot_cfg_device CHANGE site_id site_id int(11) not null COMMENT 'TENANT下的站点编号';
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_telemeter      modify  column key        */
+/*==============================================================*/
+ALTER TABLE iot_cfg_telemeter CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_telesignal      modify  column key        */
+/*==============================================================*/
+ALTER TABLE iot_cfg_telesignal CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_teleadjust      modify  column key        */
+/*==============================================================*/
+ALTER TABLE iot_cfg_teleadjust CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_telecontrol      modify  column key        */
+/*==============================================================*/
+ALTER TABLE iot_cfg_telecontrol CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_alarmmask      modify  column key        */
+/*==============================================================*/
+ALTER TABLE iot_cfg_alarmmask CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_fsu      modify  column key              */
+/*==============================================================*/
+ALTER TABLE iot_cfg_fsu CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+
+/*==============================================================*/
+/*11-30 Table: iot_cfg_workstatemask      modify  column key    */
+/*==============================================================*/
+ALTER TABLE iot_cfg_workstatemask CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+
+/*==============================================================*/
+/*11-30 Table: iot_his_devicealarm      modify  column key      */
+/*==============================================================*/
+ALTER TABLE iot_his_devicealarm CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+/*==============================================================*/
+/*11-30 Table: iot_his_telesignal      modify  column key       */
+/*==============================================================*/
+-- ALTER TABLE iot_his_telesignal CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+/*==============================================================*/
+/*11-30 Table: iot_his_operation      modify  column key        */
+/*==============================================================*/
+ALTER TABLE iot_his_operation CHANGE site_id site_id int(11) not null COMMENT '站点编号';
+
+
+/*==============================================================*/
+/*12-01 Table: iot_cfg_alminfoext      drop  column key          */
+/*==============================================================*/
+alter table  iot_cfg_alminfoext  drop column tenant_id;
+
+/*==============================================================*/
+/*12-01 Table: iot_cfg_telestrategy      drop  column key       */
+/*==============================================================*/
+alter table  iot_cfg_telestrategy  drop column tenant_id;
+
+
+/*==============================================================*/
+/*12-5 Table: iot_bas_telesignal      add  column               */
+/*==============================================================*/
+alter table iot_bas_telesignal add column  explain_type smallint not null DEFAULT 0   COMMENT '遥信量解释码';
+
+/*==============================================================*/
+/*12-5 Table: iot_cfg_telesignal      add  column               */
+/*==============================================================*/
+alter table iot_cfg_telesignal add column  explain_type smallint not null DEFAULT 0   COMMENT '遥信量解释码';
+
+/*==============================================================*/
+/*12-16 Table: iot_bas_devicetype      add  column              */
+/*==============================================================*/
+ alter table iot_bas_devicetype change device_type  device_type smallint(6) AUTO_INCREMENT COMMENT '设备类型编号';
+ 
+ 
+/*==============================================================*/
+/* 12-19Table: 修改如下表的字段类型      modify  column key                */
+/*==============================================================*/
+ALTER TABLE iot_bas_devicetemplate MODIFY bas_channel_no int(11)  DEFAULT 0   COMMENT 'FSU通道号';
+
+ALTER TABLE iot_bas_telemeter MODIFY bas_channel_no int(11)  DEFAULT 0   COMMENT 'FSU通道号';
+ALTER TABLE iot_bas_telesignal MODIFY bas_channel_no int(11)  DEFAULT 0   COMMENT 'FSU通道号';
+ALTER TABLE iot_bas_teleadjust MODIFY bas_channel_no int(11)  DEFAULT 0   COMMENT 'FSU通道号';
+ALTER TABLE iot_bas_telecontrol MODIFY bas_channel_no int(11)  DEFAULT 0   COMMENT 'FSU通道号';
+ALTER TABLE iot_bas_teleconfig MODIFY bas_channel_no int(11)  DEFAULT 0   COMMENT 'FSU通道号';
+
+ALTER TABLE iot_cfg_telemeter MODIFY channel_no int(11)  DEFAULT 0   COMMENT 'FSU的通道号';
+ALTER TABLE iot_cfg_telesignal MODIFY channel_no int(11)  DEFAULT 0   COMMENT 'FSU的通道号';
+ALTER TABLE iot_cfg_teleadjust MODIFY channel_no int(11)  DEFAULT 0   COMMENT 'FSU的通道号';
+ALTER TABLE iot_cfg_telecontrol MODIFY channel_no int(11)  DEFAULT 0   COMMENT 'FSU的通道号';
+ALTER TABLE iot_cfg_teleconfig MODIFY channel_no int(11)  DEFAULT 0   COMMENT 'FSU的通道号';
+
+
+
+
+
+

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="login_flag" jdbcType="CHAR" property="loginFlag" />
+    <result column="logout_flag" jdbcType="CHAR" property="logoutFlag" />
+    <result column="force_login" jdbcType="CHAR" property="forceLogin" />
+    <result column="login_date" jdbcType="TIMESTAMP" property="loginDate" />
+    <result column="pwd_last_date" jdbcType="TIMESTAMP" property="pwdLastDate" />
+    <result column="creater_id" jdbcType="INTEGER" property="createrId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tenant_id, user_name, password, mobile, email, login_flag, logout_flag, force_login, 
+    login_date, pwd_last_date, creater_id, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_user (tenant_id, user_name, password, 
+      mobile, email, login_flag, 
+      logout_flag, force_login, login_date, 
+      pwd_last_date, creater_id, create_date, 
+      update_date)
+    values (#{tenantId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{loginFlag,jdbcType=CHAR}, 
+      #{logoutFlag,jdbcType=CHAR}, #{forceLogin,jdbcType=CHAR}, #{loginDate,jdbcType=TIMESTAMP}, 
+      #{pwdLastDate,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="loginFlag != null">
+        login_flag,
+      </if>
+      <if test="logoutFlag != null">
+        logout_flag,
+      </if>
+      <if test="forceLogin != null">
+        force_login,
+      </if>
+      <if test="loginDate != null">
+        login_date,
+      </if>
+      <if test="pwdLastDate != null">
+        pwd_last_date,
+      </if>
+      <if test="createrId != null">
+        creater_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="loginFlag != null">
+        #{loginFlag,jdbcType=CHAR},
+      </if>
+      <if test="logoutFlag != null">
+        #{logoutFlag,jdbcType=CHAR},
+      </if>
+      <if test="forceLogin != null">
+        #{forceLogin,jdbcType=CHAR},
+      </if>
+      <if test="loginDate != null">
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pwdLastDate != null">
+        #{pwdLastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null">
+        #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.User">
+    update sys_user
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="loginFlag != null">
+        login_flag = #{loginFlag,jdbcType=CHAR},
+      </if>
+      <if test="logoutFlag != null">
+        logout_flag = #{logoutFlag,jdbcType=CHAR},
+      </if>
+      <if test="forceLogin != null">
+        force_login = #{forceLogin,jdbcType=CHAR},
+      </if>
+      <if test="loginDate != null">
+        login_date = #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pwdLastDate != null">
+        pwd_last_date = #{pwdLastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null">
+        creater_id = #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.User">
+    update sys_user
+    set tenant_id = #{tenantId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      login_flag = #{loginFlag,jdbcType=CHAR},
+      logout_flag = #{logoutFlag,jdbcType=CHAR},
+      force_login = #{forceLogin,jdbcType=CHAR},
+      login_date = #{loginDate,jdbcType=TIMESTAMP},
+      pwd_last_date = #{pwdLastDate,jdbcType=TIMESTAMP},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getUserByParams" parameterType="map" resultMap="BaseResultMap">
+  select <include refid="Base_Column_List" />
+  from sys_user where 1=1
+    <if test="loginName != null">
+      and (user_name=#{loginName} or mobile=#{loginName} or email=#{loginName})
+    </if>
+    <if test="user != null">
+      <if test="user.userName != null">
+        and user_name = #{user.userName}
+      </if>
+      <if test="user.password != null">
+        and password=#{user.password}
+      </if>
+      <if test="user.mobile != null">
+        and mobile = #{user.mobile},
+      </if>
+      <if test="user.email != null">
+        and email = #{user.email},
+      </if>
+    </if>
+  </select>
+  <select id="queryUsersByParam" parameterType="com.infore.model.User" resultMap="BaseResultMap">
+    select id,user_name,mobile,email,login_flag,logout_flag,force_login,login_date,creater_id,pwd_last_date
+    from sys_user where 1=1
+    <if test="userName != null">
+      and user_name like '${userName}%'
+    </if>
+    <if test="mobile != null">
+      and mobile LIKE '${mobile}%',
+    </if>
+    <if test="email != null">
+      and email LIKE '${email}%',
+    </if>
+  </select>
+
+
+</mapper>

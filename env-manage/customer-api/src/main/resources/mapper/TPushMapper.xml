@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.TPushMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.TPush">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="push_type" jdbcType="VARCHAR" property="pushType" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="push_service" jdbcType="VARCHAR" property="pushService" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, push_type, mobile, info, push_service, create_user, create_time, update_user, 
+    update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_push
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_push
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.TPush">
+    insert into t_push (id, push_type, mobile, 
+      info, push_service, create_user, 
+      create_time, update_user, update_time, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{pushType,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{info,jdbcType=VARCHAR}, #{pushService,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.TPush">
+    insert into t_push
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pushType != null">
+        push_type,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="pushService != null">
+        push_service,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pushType != null">
+        #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="pushService != null">
+        #{pushService,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.TPush">
+    update t_push
+    <set>
+      <if test="pushType != null">
+        push_type = #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="pushService != null">
+        push_service = #{pushService,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.TPush">
+    update t_push
+    set push_type = #{pushType,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      push_service = #{pushService,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByPagination" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_push
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="pushType != null">
+          and push_type = #{pushType,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null">
+          and mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="info != null">
+          and info = #{info,jdbcType=VARCHAR}
+      </if>
+      <if test="pushService != null">
+          and push_service = #{pushService,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectListByEntity" parameterType="com.infore.model.TPush" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_push
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="pushType != null">
+          and push_type = #{pushType,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null">
+          and mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="info != null">
+          and info = #{info,jdbcType=VARCHAR}
+      </if>
+      <if test="pushService != null">
+          and push_service = #{pushService,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

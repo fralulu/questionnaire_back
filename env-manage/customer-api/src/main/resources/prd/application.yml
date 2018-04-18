@@ -1,0 +1,92 @@
+server:
+  port: 8089
+  context-path: /envapi
+  tomcat:
+    max-threads: 500
+
+#prd
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://120.77.180.216:3306/env_enforce?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+  username: root
+  password: root
+
+#mybatis config
+mybatis:
+  basePackage: com.infore.model
+  mapperLocations: classpath*:/mapper/**/*.xml
+
+#file limit
+#上传文件大小设置
+spring.http.multipart:
+  maxFileSize: 20Mb
+  maxRequestSize: 50Mb
+
+#
+jwt:
+  security.key: ZDJWc1lXSnBZVzF6YzI4eE1qTTBOUSUzRCUzRAXY
+##60*24*30
+  app.expired: 43200
+
+#seaweedfs conf
+seaweedfs:
+  host: 192.168.31.91
+  port: 9333
+  assign: dir/assign
+  temp: /Users/scorp/Documents/inforeProject/envEnforce/trunk/env-enforce/customer-api/temp/
+
+#common file sys
+common:
+  file:
+    host: http://120.77.180.216:8088
+#common.file.host=http://192.168.31.90:8088
+    root: /enforce/
+
+#word模板
+word:
+  tmpl: /data/opt/enforce/
+
+#hbase conf
+hbase:
+  zk.quorum: 192.168.31.253:2181
+
+redis:
+    nodes: 192.168.31.115:6379,192.168.31.142:6379,192.168.31.144:6379
+    timeout: 3000
+    maxAttempts: 5
+
+redis.pool:
+    maxTotal: 400
+    maxIdle: 100
+    maxWait: 3000
+    minIdle: 50
+    testOnBorrow: false
+
+redis.sentinel:
+  node1: 192.168.31.115:26379
+  node2: 192.168.31.142:26379
+  node3: 192.168.31.144:26379
+  masterName1: master001
+  masterName2: master002
+  masterName3: master003
+
+#log path
+logging:
+  config: classpath:log4j2.xml
+log:
+  base: enforce
+
+# $ curl -X POST 127.0.0.1:8089/envapi/shutdown
+# {"message":"Shutting down, bye..."}
+#启用shutdown
+endpoints:
+  shutdown:
+    enabled: true
+#禁用密码验证
+    sensitive: false
+#监控管理路径
+management:
+  context-path: /manage
+#指定管理端口和IP
+  port: 9090
+  address: 127.0.0.1

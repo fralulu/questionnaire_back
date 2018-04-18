@@ -1,0 +1,134 @@
+server:
+  port: 8099
+  context-path: /api
+  tomcat:
+    max-threads: 500
+
+#dev
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://120.79.11.68:3306/qh_manage?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+  username: root
+  password: 12345678
+##############################################DruidDataSource#######################
+druid:
+  initialSize: 5
+  minIdle: 5
+  maxActive: 300
+  maxWait: 60000
+  removeAbandoned: true
+  removeAbandonedTimeout: 1800
+  testWhileIdle: true
+  testOnBorrow: false
+  poolPreparedStatements: true
+  maxPoolPreparedStatementPerConnectionSize: 50
+
+#mybatis config
+mybatis:
+  typeAliasesPackage: com.infore.model
+  mapperLocations: classpath*:/mapper/**/*.xml
+
+#file limit
+#上传文件大小设置
+spring.http.multipart:
+  maxFileSize: 20Mb
+  maxRequestSize: 50Mb
+
+#
+jwt:
+  security.key: ZDJWc1lXSnBZVzF6YzI4eE1qTTBOUSUzRCUzRA
+##60*24*30
+  app.expired: 43200
+
+#seaweedfs conf
+seaweedfs:
+  host: 192.168.31.91
+  port: 9333
+  assign: dir/assign
+  temp: /Users/scorp/Documents/inforeProject/envEnforce/trunk/env-enforce/customer-api/temp/
+
+#common file sys
+common:
+  file:
+    host: http://192.168.31.91:8088
+#common.file.host=http://192.168.31.90:8088
+    root: /enforce/
+
+#word模板
+word:
+  tmpl: /data/opt/enforce/
+
+#hbase conf
+hbase:
+  zk.quorum: 192.168.31.253:2181
+
+redis:
+    nodes: 192.168.31.115:6379,192.168.31.142:6379,192.168.31.144:6379
+    timeout: 3000
+    maxAttempts: 5
+
+redis.pool:
+    maxTotal: 400
+    maxIdle: 100
+    maxWait: 3000
+    minIdle: 50
+    testOnBorrow: false
+
+redis.sentinel:
+  node1: 192.168.37.16:26379
+  node2: 192.168.37.17:26379
+  node3: 192.168.37.18:26379
+  masterName1: master001
+  masterName2: master002
+  masterName3: master003
+
+#stream srvkey
+stream:
+  srvkey: RGJWc1lXSnBZVzF6YzI4eE1qTTBOUSUzRUbkh
+  defaultUrl: http://192.168.31.131:8080/api/v1/servers
+
+#giotp use config
+giotp:
+  customerCode: mangage_clientsdk_001
+  zookeeper: 192.168.37.16:3000,192.168.37.17:3001,192.168.37.18:3002
+  streamPath: /streamer
+
+#log path
+logging:
+  config: classpath:log4j2.xml
+log:
+  base: e:/enforce
+
+#上传文件
+files:
+   uploadPath:
+      deviceFile: /app/files/devicefiles/
+      #deviceFile: D:\aaa\fileupload\
+
+
+###############################分割线以上加入系统配置###################################
+#添加那个目录的文件需要restart /Users/scorp/Documents/inforeProject/env-manage/customer-api
+#spring:
+#  devtools.restart.additional-paths: customer-api/src/main/java
+
+# $ curl -X POST 127.0.0.1:8089/envapi/shutdown
+# {"message":"Shutting down, bye..."}
+#启用shutdown
+endpoints:
+  shutdown:
+    enabled: true
+#禁用密码验证
+    sensitive: false
+##运行状态 actuator监控
+  loggers:
+    enabled: true
+    sensitive: false
+
+#监控管理路径
+management:
+  context-path: /manage
+#指定管理端口和IP
+  port: 9090
+  address: 127.0.0.1
+  
+

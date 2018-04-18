@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.TAnswerMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.TAnswer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="test_id" jdbcType="INTEGER" property="testId" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="answer_ip" jdbcType="VARCHAR" property="answerIp" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="statistics_flag" jdbcType="VARCHAR" property="statisticsFlag" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, paper_id, test_id, answer, answer_ip, channel, statistics_flag, remark, 
+    create_user, create_time, update_user, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_answer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_answer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.TAnswer">
+    insert into t_answer (id, user_id, paper_id, 
+      test_id, answer, answer_ip, 
+      channel, statistics_flag, remark, 
+      create_user, create_time, update_user, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, 
+      #{testId,jdbcType=INTEGER}, #{answer,jdbcType=VARCHAR}, #{answerIp,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{statisticsFlag,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.TAnswer">
+    insert into t_answer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="paperId != null">
+        paper_id,
+      </if>
+      <if test="testId != null">
+        test_id,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="answerIp != null">
+        answer_ip,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="statisticsFlag != null">
+        statistics_flag,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="testId != null">
+        #{testId,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="answerIp != null">
+        #{answerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticsFlag != null">
+        #{statisticsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.TAnswer">
+    update t_answer
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="testId != null">
+        test_id = #{testId,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="answerIp != null">
+        answer_ip = #{answerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticsFlag != null">
+        statistics_flag = #{statisticsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.TAnswer">
+    update t_answer
+    set user_id = #{userId,jdbcType=INTEGER},
+      paper_id = #{paperId,jdbcType=INTEGER},
+      test_id = #{testId,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=VARCHAR},
+      answer_ip = #{answerIp,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      statistics_flag = #{statisticsFlag,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByPagination" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_answer
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+          and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="paperId != null">
+          and paper_id = #{paperId,jdbcType=INTEGER}
+      </if>
+      <if test="testId != null">
+          and test_id = #{testId,jdbcType=INTEGER}
+      </if>
+      <if test="answer != null">
+          and answer = #{answer,jdbcType=VARCHAR}
+      </if>
+      <if test="answerIp != null">
+          and answer_ip = #{answerIp,jdbcType=VARCHAR}
+      </if>
+      <if test="channel != null">
+          and channel = #{channel,jdbcType=VARCHAR}
+      </if>
+      <if test="statisticsFlag != null">
+          and statistics_flag = #{statisticsFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+  <select id="selectListByEntity" parameterType="com.infore.model.TAnswer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_answer
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+          and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="paperId != null">
+          and paper_id = #{paperId,jdbcType=INTEGER}
+      </if>
+      <if test="testId != null">
+          and test_id = #{testId,jdbcType=INTEGER}
+      </if>
+      <if test="answer != null">
+          and answer = #{answer,jdbcType=VARCHAR}
+      </if>
+      <if test="answerIp != null">
+          and answer_ip = #{answerIp,jdbcType=VARCHAR}
+      </if>
+      <if test="channel != null">
+          and channel = #{channel,jdbcType=VARCHAR}
+      </if>
+      <if test="statisticsFlag != null">
+          and statistics_flag = #{statisticsFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+</mapper>

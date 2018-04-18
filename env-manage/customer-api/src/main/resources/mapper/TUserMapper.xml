@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.TUserMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.TUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="register_info" jdbcType="VARCHAR" property="registerInfo" />
+    <result column="openId" jdbcType="VARCHAR" property="openid" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_type, mobile, register_info, openId, create_user, create_time, update_user, 
+    update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.TUser">
+    insert into t_user (id, user_type, mobile, 
+      register_info, openId, create_user, 
+      create_time, update_user, update_time, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{userType,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{registerInfo,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.TUser">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="registerInfo != null">
+        register_info,
+      </if>
+      <if test="openid != null">
+        openId,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="registerInfo != null">
+        #{registerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.TUser">
+    update t_user
+    <set>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="registerInfo != null">
+        register_info = #{registerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        openId = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.TUser">
+    update t_user
+    set user_type = #{userType,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      register_info = #{registerInfo,jdbcType=VARCHAR},
+      openId = #{openid,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByPagination" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userType != null">
+          and user_type = #{userType,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null">
+          and mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="registerInfo != null">
+          and register_info = #{registerInfo,jdbcType=VARCHAR}
+      </if>
+      <if test="openid != null">
+          and openId = #{openid,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectListByEntity" parameterType="com.infore.model.TUser" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userType != null">
+          and user_type = #{userType,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null">
+          and mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="registerInfo != null">
+          and register_info = #{registerInfo,jdbcType=VARCHAR}
+      </if>
+      <if test="openid != null">
+          and openId = #{openid,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

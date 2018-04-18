@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.RpTestMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.RpTest">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="test_id" jdbcType="INTEGER" property="testId" />
+    <result column="test_options" jdbcType="VARCHAR" property="testOptions" />
+    <result column="option_answer_count" jdbcType="VARCHAR" property="optionAnswerCount" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, paper_id, test_id, test_options, option_answer_count, create_user, create_time, 
+    update_user, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rp_test
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rp_test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.RpTest">
+    insert into rp_test (id, paper_id, test_id, 
+      test_options, option_answer_count, create_user, 
+      create_time, update_user, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{testId,jdbcType=INTEGER}, 
+      #{testOptions,jdbcType=VARCHAR}, #{optionAnswerCount,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.RpTest">
+    insert into rp_test
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paperId != null">
+        paper_id,
+      </if>
+      <if test="testId != null">
+        test_id,
+      </if>
+      <if test="testOptions != null">
+        test_options,
+      </if>
+      <if test="optionAnswerCount != null">
+        option_answer_count,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="testId != null">
+        #{testId,jdbcType=INTEGER},
+      </if>
+      <if test="testOptions != null">
+        #{testOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="optionAnswerCount != null">
+        #{optionAnswerCount,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.RpTest">
+    update rp_test
+    <set>
+      <if test="paperId != null">
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="testId != null">
+        test_id = #{testId,jdbcType=INTEGER},
+      </if>
+      <if test="testOptions != null">
+        test_options = #{testOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="optionAnswerCount != null">
+        option_answer_count = #{optionAnswerCount,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.RpTest">
+    update rp_test
+    set paper_id = #{paperId,jdbcType=INTEGER},
+      test_id = #{testId,jdbcType=INTEGER},
+      test_options = #{testOptions,jdbcType=VARCHAR},
+      option_answer_count = #{optionAnswerCount,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByPagination" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rp_test
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="paperId != null">
+          and paper_id = #{paperId,jdbcType=INTEGER}
+      </if>
+      <if test="testId != null">
+          and test_id = #{testId,jdbcType=INTEGER}
+      </if>
+      <if test="testOptions != null">
+          and test_options = #{testOptions,jdbcType=VARCHAR}
+      </if>
+      <if test="optionAnswerCount != null">
+          and option_answer_count = #{optionAnswerCount,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+  <select id="selectListByEntity" parameterType="com.infore.model.RpTest" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rp_test
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="paperId != null">
+          and paper_id = #{paperId,jdbcType=INTEGER}
+      </if>
+      <if test="testId != null">
+          and test_id = #{testId,jdbcType=INTEGER}
+      </if>
+      <if test="testOptions != null">
+          and test_options = #{testOptions,jdbcType=VARCHAR}
+      </if>
+      <if test="optionAnswerCount != null">
+          and option_answer_count = #{optionAnswerCount,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+</mapper>

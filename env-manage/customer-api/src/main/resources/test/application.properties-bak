@@ -1,0 +1,48 @@
+server.port=8089
+server.context-path=/envapi
+
+#test
+jdbc.driverClassName = com.mysql.jdbc.Driver
+jdbc.url = jdbc:mysql://192.168.31.91:3306/env_enforce?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+jdbc.username = root
+jdbc.password = root
+
+#mybatis config
+mybatis.basePackage=com.infore.model
+mybatis.mapperLocations=classpath*:/mapper/**/*.xml
+
+#file limit
+#上传文件大小设置
+multipart.maxFileSize=10Mb
+multipart.maxRequestSize=50Mb
+
+#
+jwt.security.key: ZDJWc1lXSnBZVzF6YzI4eE1qTTBOUSUzRCUzRA
+##60*24*30
+jwt.app.expired: 43200
+
+#seaweedfs conf
+seaweedfs.host=192.168.31.91
+seaweedfs.port=9333
+seaweedfs.assign=dir/assign
+seaweedfs.temp=/Users/scorp/Documents/inforeProject/envEnforce/trunk/env-enforce/customer-api/temp/
+
+#common file sys
+common.file.host=http://192.168.31.91:8088
+common.file.root=/enforce/
+
+#log path
+logging.config=classpath:log4j2.xml
+log.base=/data/opt/logs/enforce
+
+# $ curl -X POST 127.0.0.1:8089/envapi/shutdown
+# {"message":"Shutting down, bye..."}
+#启用shutdown
+endpoints.shutdown.enabled=true
+#禁用密码验证
+endpoints.shutdown.sensitive=false
+#监控管理路径
+management.context-path=/manage
+#指定管理端口和IP
+management.port=9090
+management.address=127.0.0.1

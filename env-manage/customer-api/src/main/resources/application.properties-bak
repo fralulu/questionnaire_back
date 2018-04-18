@@ -1,0 +1,14 @@
+server.port=8089
+server.context-path=/envapi
+
+
+jdbc.driverClassName = com.mysql.jdbc.Driver
+jdbc.url = jdbc:mysql://192.168.31.91:3306/env_enforce?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+jdbc.username = root
+jdbc.password = root
+
+mybatis.basePackage=com.infore.model
+mybatis.mapperLocations=classpath*:/mapper/**/*.xml
+
+
+logging.config=classpath:log4j2.xml

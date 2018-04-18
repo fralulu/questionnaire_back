@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.TPaperMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.TPaper">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="paper_type" jdbcType="VARCHAR" property="paperType" />
+    <result column="paper_name" jdbcType="VARCHAR" property="paperName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, paper_type, paper_name, description, status, begin_time, end_time, create_user, 
+    create_time, update_user, update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_paper
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_paper
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.TPaper">
+    insert into t_paper (id, paper_type, paper_name, 
+      description, status, begin_time, 
+      end_time, create_user, create_time, 
+      update_user, update_time, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{paperType,jdbcType=VARCHAR}, #{paperName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.TPaper" keyProperty="id" useGeneratedKeys="true">
+    insert into t_paper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paperType != null">
+        paper_type,
+      </if>
+      <if test="paperName != null">
+        paper_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paperType != null">
+        #{paperType,jdbcType=VARCHAR},
+      </if>
+      <if test="paperName != null">
+        #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.TPaper">
+    update t_paper
+    <set>
+      <if test="paperType != null">
+        paper_type = #{paperType,jdbcType=VARCHAR},
+      </if>
+      <if test="paperName != null">
+        paper_name = #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.TPaper">
+    update t_paper
+    set paper_type = #{paperType,jdbcType=VARCHAR},
+      paper_name = #{paperName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByPagination" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_paper
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="paperType != null">
+          and paper_type = #{paperType,jdbcType=VARCHAR}
+      </if>
+      <if test="paperName != null">
+          and paper_name = #{paperName,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null">
+          and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+          and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="beginTime != null">
+          and begin_time = #{beginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+          and end_time = #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectListByEntity" parameterType="com.infore.model.TPaper" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_paper
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="paperType != null">
+          and paper_type = #{paperType,jdbcType=VARCHAR}
+      </if>
+      <if test="paperName != null">
+          and paper_name = #{paperName,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null">
+          and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+          and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="beginTime != null">
+          and begin_time = #{beginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+          and end_time = #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+  
+  
+  <select id="selectListLike" parameterType="com.infore.model.dto.TPaperVo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_paper
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="paperType != null">
+          and paper_type = #{paperType,jdbcType=VARCHAR}
+      </if>
+      <if test="paperName != null">
+          and paper_name = #{paperName,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null">
+          and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+          and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="beginTime != null">
+          and begin_time = #{beginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+          and end_time = #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null">
+          and create_user = #{createUser,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+          and update_user = #{updateUser,jdbcType=INTEGER}
+      </if>
+      <if test="updateTime != null">
+          and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null">
+          and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      
+      <if test="queryLike != null" >
+      	 and (
+      	 
+             (paper_name like  concat(concat('%',#{queryLike,jdbcType=VARCHAR}),'%'))
+              
+      	 )
+      </if>
+    </where>
+  </select>
+  
+  <!-- 批量删除 某一试卷的试题 -->
+  <delete id="batchDeleteTestByPaperId" parameterType="java.lang.Integer">
+    delete from t_test
+    where paper_id =  #{paperId,jdbcType=INTEGER}
+  </delete>
+  
+  
+</mapper>

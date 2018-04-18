@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infore.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.infore.model.UserRole">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, user_id, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from sys_user_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.infore.model.UserRole">
+    insert into sys_user_role (role_id, user_id, create_date, 
+      update_date)
+    values (#{roleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.infore.model.UserRole">
+    insert into sys_user_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infore.model.UserRole">
+    update sys_user_role
+    <set>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infore.model.UserRole">
+    update sys_user_role
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryByParam" parameterType="com.infore.model.UserRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user_role
+    where 1=1
+    <if test="roleId != null">
+      and role_id =#{roleId,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null">
+     and user_id =#{userId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="countByUserId" parameterType="java.lang.Integer" resultType="int">
+    select count(1)
+    from sys_user_role
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByUserId" parameterType="map">
+    delete from sys_user_role
+    where  user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into sys_user_role (role_id, user_id)
+    values
+    <foreach collection="list" item="curr" separator=",">
+      (#{curr.roleId,jdbcType=INTEGER}, #{curr.userId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+</mapper>

@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.infore</groupId>
-            <artifactId>manage-service-api</artifactId>
+            <artifactId>manage-server-api</artifactId>
             <version>${infore.common.version}</version>
         </dependency>
 
